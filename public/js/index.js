@@ -31,12 +31,14 @@ socket.on('newLocationMessage', (message) => {
 jQuery('#message-form').on('submit', (e) => {
     e.preventDefault();
 
+    const messageTextBox = jQuery('[name=message');
+
     socket.emit('createMessage', {
         from: 'user',
-        text: jQuery('[name=message').val()
+        text: messageTextBox.val()
     }, (data) => {
         // fires if acknowledgeement 
-        console.log(data);
+        messageTextBox.val('');
     });
 });
 
