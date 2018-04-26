@@ -18,6 +18,15 @@ const scrollToBottom = () => {
 
 socket.on('connect', () => {
     console.log('connected to server');
+    // emit join room event
+    const params = jQuery.deparam(window.location.search);
+    socket.emit('join', params, (err) => {
+        if (err) {
+            window.location.href = '/';
+        } else {
+            console.log('no error');
+        }
+    });
 });
 
 socket.on('disconnect', () => {
