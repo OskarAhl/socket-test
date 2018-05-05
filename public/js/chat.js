@@ -73,7 +73,6 @@ jQuery('#message-form').on('submit', (e) => {
     const messageTextBox = jQuery('[name=message');
 
     socket.emit('createMessage', {
-        from: 'user',
         text: messageTextBox.val()
     }, (data) => {
         // fires if acknowledgeement 
