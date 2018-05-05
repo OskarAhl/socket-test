@@ -40,10 +40,13 @@ io.on('connection', (socket) => {
     });
 
     socket.on('createMessage', (message, callback) => {
-        console.log(message);
+        const user = user.getUser(socket.id);
+
+        if (user && isRealString(message.text)) {
+            // emits to all connected clients
+            io.to(user.room).emit('newMessage', generateMessage(user.name, message.text));
+        }
         
-        // emits to all connected clients
-        io.emit('newMessage', generateMessage(message.from, message.text));
         callback();
     });
 
